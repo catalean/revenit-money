@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>curs-valutar</artifactId>
+        <groupId>ro.cb.finance</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>bnr</artifactId>
+    <packaging>jar</packaging>
+
+    <name>CB Finance - BNR</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.10.Final</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.12.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <generateDirectory>src/main/java</generateDirectory>
+                    <generatePackage>ro.cb.finance.bnr.xml.model</generatePackage>
+                    <episode>false</episode>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>io.github.divinespear</groupId>
+                <artifactId>jpa-schema-maven-plugin</artifactId>
+                <version>0.1.12</version>
+                <executions>
+                    <execution>
+                        <id>generate-ddl-create</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outputDirectory>${basedir}/src/main/resources/sql</outputDirectory>
+                    <databaseAction>none</databaseAction>
+                    <scriptAction>drop-and-create</scriptAction>
+                    <persistenceUnitName>cb-finance-pu</persistenceUnitName>
+                    <dialect>org.hibernate.dialect.H2Dialect</dialect>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

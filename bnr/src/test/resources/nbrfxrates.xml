@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataSet xmlns="http://www.bnr.ro/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.bnr.ro/xsd nbrfxrates.xsd">
+	<Header>
+		<Publisher>National Bank of Romania</Publisher>
+		<PublishingDate>2015-07-01</PublishingDate>
+		<MessageType>DR</MessageType>
+	</Header>
+	<Body>
+		<Subject>Reference rates</Subject>
+		<OrigCurrency>RON</OrigCurrency>
+		<Cube date="2015-07-01">
+			<Rate currency="AED">1.0933</Rate>
+			<Rate currency="AUD">3.0958</Rate>
+			<Rate currency="BGN">2.2847</Rate>
+			<Rate currency="BRL">1.2934</Rate>
+			<Rate currency="CAD">3.2105</Rate>
+			<Rate currency="CHF">4.2798</Rate>
+			<Rate currency="CNY">0.6475</Rate>
+			<Rate currency="CZK">0.1641</Rate>
+			<Rate currency="DKK">0.5989</Rate>
+			<Rate currency="EGP">0.5263</Rate>
+			<Rate currency="EUR">4.4685</Rate>
+			<Rate currency="GBP">6.2866</Rate>
+			<Rate currency="HUF" multiplier="100">1.4230</Rate>
+			<Rate currency="INR">0.0632</Rate>
+			<Rate currency="JPY" multiplier="100">3.2692</Rate>
+			<Rate currency="KRW" multiplier="100">0.3583</Rate>
+			<Rate currency="MDL">0.2120</Rate>
+			<Rate currency="MXN">0.2551</Rate>
+			<Rate currency="NOK">0.5109</Rate>
+			<Rate currency="NZD">2.7215</Rate>
+			<Rate currency="PLN">1.0674</Rate>
+			<Rate currency="RSD">0.0371</Rate>
+			<Rate currency="RUB">0.0726</Rate>
+			<Rate currency="SEK">0.4837</Rate>
+			<Rate currency="TRY">1.4986</Rate>
+			<Rate currency="UAH">0.1911</Rate>
+			<Rate currency="USD">4.0157</Rate>
+			<Rate currency="XAU">151.3173</Rate>
+			<Rate currency="XDR">5.6340</Rate>
+			<Rate currency="ZAR">0.3296</Rate>
+		</Cube>
+	</Body>
+</DataSet>
+
