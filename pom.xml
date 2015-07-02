@@ -12,8 +12,8 @@
     <name>CB Finance</name>
 
     <modules>
-        <module>bnr</module>
-        <module>storage</module>
+        <module>cb-finance-storage-api</module>
+        <module>cb-finance-bnr</module>
     </modules>
 
     <dependencyManagement>
