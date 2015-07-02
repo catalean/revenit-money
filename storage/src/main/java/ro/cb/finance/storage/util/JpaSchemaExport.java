@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * @author Catalin Kormos
+ *
  */
 public class JpaSchemaExport {
 

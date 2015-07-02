@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * @author Catalin Kormos
+ *
  */
 @Entity
 @Table(name = Bank.TABLE_NAME)

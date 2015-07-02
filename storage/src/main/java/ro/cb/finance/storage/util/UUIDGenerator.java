@@ -3,7 +3,7 @@ package ro.cb.finance.storage.util;
 import java.util.UUID;
 
 /**
- * @author Catalin Kormos
+ *
  */
 public final class UUIDGenerator {
 

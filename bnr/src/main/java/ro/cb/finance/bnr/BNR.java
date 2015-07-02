@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * @author Catalin Kormos
+ *
  */
 public final class BNR {
 

@@ -9,35 +9,39 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cb-finance-bnr</artifactId>
+    <artifactId>cb-finance-storage</artifactId>
     <packaging>jar</packaging>
 
-    <name>CB Finance - BNR</name>
+    <name>CB Finance - Storage</name>
 
     <dependencies>
         <dependency>
-            <groupId>ro.cb.finance</groupId>
-            <artifactId>storage</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.12.3</version>
+                <groupId>io.github.divinespear</groupId>
+                <artifactId>jpa-schema-maven-plugin</artifactId>
+                <version>0.1.12</version>
                 <executions>
                     <execution>
+                        <id>generate-ddl-create</id>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <generateDirectory>src/main/java</generateDirectory>
-                    <generatePackage>ro.cb.finance.bnr.xml.model</generatePackage>
-                    <episode>false</episode>
+                    <outputDirectory>${basedir}/src/main/resources/sql</outputDirectory>
+                    <databaseAction>none</databaseAction>
+                    <scriptAction>drop-and-create</scriptAction>
+                    <persistenceUnitName>cb-finance-pu</persistenceUnitName>
+                    <dialect>org.hibernate.dialect.H2Dialect</dialect>
                 </configuration>
             </plugin>
         </plugins>

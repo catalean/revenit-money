@@ -11,7 +11,7 @@ import javax.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 
 /**
- * @author Catalin Kormos
+ *
  */
 @Entity
 @Table(name = Rate.TABLE_NAME,

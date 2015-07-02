@@ -10,7 +10,7 @@ import javax.persistence.Version;
 /**
  * Base class defining common fields and their mappings for all entities.
  *
- * @author Catalin Kormos
+ *
  */
 @MappedSuperclass
 public abstract class AbstractEntity {
