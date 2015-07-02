@@ -20,30 +20,4 @@
             <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>io.github.divinespear</groupId>
-                <artifactId>jpa-schema-maven-plugin</artifactId>
-                <version>0.1.12</version>
-                <executions>
-                    <execution>
-                        <id>generate-ddl-create</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <outputDirectory>${basedir}/src/main/resources/sql</outputDirectory>
-                    <databaseAction>none</databaseAction>
-                    <scriptAction>drop-and-create</scriptAction>
-                    <persistenceUnitName>cb-finance-pu</persistenceUnitName>
-                    <dialect>org.hibernate.dialect.H2Dialect</dialect>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>

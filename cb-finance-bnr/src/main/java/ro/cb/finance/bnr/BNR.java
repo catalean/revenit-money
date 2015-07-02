@@ -1,21 +1,12 @@
 package ro.cb.finance.bnr;
 
-import org.xml.sax.SAXException;
-import ro.cb.finance.bnr.xml.model.DataSet;
+import ro.cb.finance.storage.RatesStorage;
+import ro.cb.finance.storage.RatesStorageProvider;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import java.io.IOException;
-import java.io.InputStream;
+import java.math.BigDecimal;
 
 /**
- *
+ * Cursul valutar BNR se actualizeaza in fiecare zi bancara, dupa ora 13:15, cel tarziu pana la ora 14:00. Cursul stabilit de BNR este valabil pentru ziua urmatoare.
  */
 public final class BNR {
 
@@ -26,49 +17,25 @@ public final class BNR {
     /** */
     public static final String LAST_10_RATES    = "http://bnr.ro/nbrfxrates10days.xml";
     /** */
-    public static final String ANNUAL_RATES      = "http://bnr.ro/files/xml/years/nbrfxrates%s.xml";
+    public static final String ANNUAL_RATES     = "http://bnr.ro/files/xml/years/nbrfxrates%s.xml";
 
-    private Unmarshaller unmarshaller;
+    /**
+     * Contacts the website of BNR and downloads the rates that are not yet in the current storage.
+     */
+    public static void actualizeRates() {
+        RatesStorage storage = RatesStorageProvider.open();
+        System.out.println(storage);
 
-    public BNR() throws JAXBException, SAXException, IOException {
-        JAXBContext jc = JAXBContext.newInstance(DataSet.class);
-
-        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        Schema schema = factory.newSchema(new StreamSource(getClass().getResourceAsStream("/nbrfxrates.xsd")));
-
-        unmarshaller = jc.createUnmarshaller();
-        unmarshaller.setSchema(schema);
-        unmarshaller.setListener(new UnmarshallListener());
-        unmarshaller.setAdapter(new XmlAdapter() {
-            @Override
-            public Object unmarshal(Object v) throws Exception {
-                System.out.println("unmarshal "+v);
-                return v;
-            }
-
-            @Override
-            public Object marshal(Object v) throws Exception {
-                return null;
-            }
-        });
+        if (storage != null) {
+            storage.close();
+        }
     }
 
-    public void init(InputStream source) throws JAXBException {
-        DataSet dataSet = (DataSet)unmarshaller.unmarshal(source);
-
-
+    public BigDecimal convert(BigDecimal amount, String from, String to) {
+        return null;
     }
 
-    private static final class UnmarshallListener extends Unmarshaller.Listener {
-
-        @Override
-        public void afterUnmarshal(Object target, Object parent) {
-            System.out.println("after "+target+", "+parent);
-        }
-
-        @Override
-        public void beforeUnmarshal(Object target, Object parent) {
-            System.out.println("before " + target + ", " + parent);
-        }
+    public static void main(String[] args) {
+        BNR.actualizeRates();
     }
 }

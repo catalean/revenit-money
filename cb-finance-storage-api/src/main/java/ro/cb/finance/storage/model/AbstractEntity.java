@@ -5,7 +5,10 @@ import ro.cb.finance.storage.util.UUIDGenerator;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import javax.persistence.Version;
+
+import static ro.cb.finance.storage.model.AbstractEntity.Columns.*;
 
 /**
  * Base class defining common fields and their mappings for all entities.
@@ -14,9 +17,9 @@ import javax.persistence.Version;
 public abstract class AbstractEntity {
 
     /** Predefined suffix value added to all FK column names */
-    protected static final String _FK = "_FK";
+    protected static final String _FK = "_fk";
     /** Predefined suffix value added to all index names */
-    protected static final String _IX = "_IX";
+    protected static final String _IX = "_ix";
 
     /**
      * Class declaring all column names used by this entity.
@@ -38,11 +41,11 @@ public abstract class AbstractEntity {
      * Technical unique key.
      */
     @Id
-    @Column(name = Columns.UUID, length = 32)
+    @Column(name = UUID, length = 32)
     private String uuid;
 
     @Version
-    @Column(name = Columns.VERSION, nullable = false)
+    @Column(name = VERSION, nullable = false)
     private Long version;
 
     /**
@@ -52,15 +55,29 @@ public abstract class AbstractEntity {
         //do nothing
     }
 
+    @PrePersist
+    public void prePersist() {
+        if (uuid == null) {
+            createUUid();
+        }
+    }
+
     /**
      * @return
      */
     public String getUuid() {
         if (uuid == null) {
-            uuid = UUIDGenerator.next();
+            createUUid();
         }
 
         return uuid;
+    }
+
+    /**
+     *
+     */
+    private void createUUid() {
+        this.uuid = UUIDGenerator.next();
     }
 
     /**

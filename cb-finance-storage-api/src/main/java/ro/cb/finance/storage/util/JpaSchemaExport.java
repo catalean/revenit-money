@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  *
  */
-public class JpaSchemaExport {
+public final class JpaSchemaExport {
 
     public static void main(String[] args) throws IOException {
         if (args == null || args.length == 0) {
@@ -19,7 +19,7 @@ public class JpaSchemaExport {
         System.exit(0);
     }
 
-    public static void execute() {
+    private static void execute() {
         execute("cb-finance-pu", System.getProperty("user.dir"));
     }
 
