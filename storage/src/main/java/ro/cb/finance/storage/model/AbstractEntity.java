@@ -9,8 +9,6 @@ import javax.persistence.Version;
 
 /**
  * Base class defining common fields and their mappings for all entities.
- *
- *
  */
 @MappedSuperclass
 public abstract class AbstractEntity {
@@ -25,8 +23,8 @@ public abstract class AbstractEntity {
      */
     public static class Columns {
 
-        public static final String UUID = "uuid";
-        public static final String VERSION = "version";
+        public static final String UUID     = "uuid";
+        public static final String VERSION  = "version";
 
         /**
          * Constructor, protected as this class only declares static fields (constants) and it should never be instantiated.

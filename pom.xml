@@ -20,7 +20,7 @@
         <dependencies>
             <dependency>
                 <groupId>ro.cb.finance</groupId>
-                <artifactId>storage</artifactId>
+                <artifactId>cb-finance-storage-api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 

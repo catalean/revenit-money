@@ -10,8 +10,17 @@ import java.util.Properties;
 public class JpaSchemaExport {
 
     public static void main(String[] args) throws IOException {
+        if (args == null || args.length == 0) {
+            execute();
+            return;
+        }
+
         execute(args[0], args[1]);
         System.exit(0);
+    }
+
+    public static void execute() {
+        execute("cb-finance-pu", System.getProperty("user.dir"));
     }
 
     public static void execute(String persistenceUnitName, String destination) {

@@ -10,20 +10,23 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 
+import static ro.cb.finance.storage.model.Rate.*;
+import static ro.cb.finance.storage.model.Rate.Columns.*;
+
 /**
  *
  */
 @Entity
-@Table(name = Rate.TABLE_NAME,
+@Table(name = TABLE_NAME,
         indexes = {
-                @Index(name = Rate.TABLE_NAME_SHORT + "_" + Rate.Columns.BANK_UUID + Rate._IX, columnList = Rate.Columns.BANK_UUID),
-                @Index(name = Rate.TABLE_NAME_SHORT + "_" + Rate.Columns.ORIGINAL_CURRENCY_UUID + Rate._IX, columnList = Rate.Columns.ORIGINAL_CURRENCY_UUID),
-                @Index(name = Rate.TABLE_NAME_SHORT + "_" + Rate.Columns.CURRENCY_UUID + Rate._IX, columnList = Rate.Columns.CURRENCY_UUID),
-                @Index(name = Rate.TABLE_NAME_SHORT + "_" + Rate.Columns.DATE_UUID + Rate._IX, columnList = Rate.Columns.DATE_UUID)
+                @Index(name = TABLE_NAME_SHORT + "_" + BANK_UUID + _IX, columnList = BANK_UUID),
+                @Index(name = TABLE_NAME_SHORT + "_" + BASE_CURRENCY_UUID + _IX, columnList = BASE_CURRENCY_UUID),
+                @Index(name = TABLE_NAME_SHORT + "_" + CURRENCY_UUID + _IX, columnList = CURRENCY_UUID),
+                @Index(name = TABLE_NAME_SHORT + "_" + DATE_UUID + _IX, columnList = DATE_UUID)
         },
         uniqueConstraints = {
                 @UniqueConstraint(name = "unique_rates_per_date", columnNames = {
-                        Rate.Columns.BANK_UUID, Rate.Columns.ORIGINAL_CURRENCY_UUID, Rate.Columns.CURRENCY_UUID, Rate.Columns.DATE_UUID
+                        BANK_UUID, BASE_CURRENCY_UUID, CURRENCY_UUID, DATE_UUID
                 })
         }
 )
@@ -39,11 +42,11 @@ public class Rate extends AbstractEntity {
      */
     public static final class Columns extends AbstractEntity.Columns {
 
-        public static final String BANK_UUID = "bank_uuid";
-        public static final String ORIGINAL_CURRENCY_UUID = "orig_currency_uuid";
-        public static final String CURRENCY_UUID = "currency_uuid";
-        public static final String DATE_UUID = "date_uuid";
-        public static final String VALUE = "value";
+        public static final String BANK_UUID            = "bank_uuid";
+        public static final String BASE_CURRENCY_UUID   = "base_currency_uuid";
+        public static final String CURRENCY_UUID        = "currency_uuid";
+        public static final String DATE_UUID            = "date_uuid";
+        public static final String VALUE                = "value";
 
         /**
          * Constructor, private as this class only declares static fields (constants) and it should never be instantiated.
@@ -53,22 +56,22 @@ public class Rate extends AbstractEntity {
         }
     }
 
-    @JoinColumn(name = Columns.BANK_UUID, foreignKey = @ForeignKey(name = TABLE_NAME_SHORT + "_" + Columns.BANK_UUID  + _FK), nullable = false)
+    @JoinColumn(name = BANK_UUID, foreignKey = @ForeignKey(name = TABLE_NAME_SHORT + "_" + BANK_UUID  + _FK), nullable = false)
     @ManyToOne(optional = false)
     private Bank bank;
 
-    @JoinColumn(name = Columns.ORIGINAL_CURRENCY_UUID, foreignKey = @ForeignKey(name = TABLE_NAME_SHORT + "_" + Columns.ORIGINAL_CURRENCY_UUID  + _FK), nullable = false)
+    @JoinColumn(name = BASE_CURRENCY_UUID, foreignKey = @ForeignKey(name = TABLE_NAME_SHORT + "_" + BASE_CURRENCY_UUID  + _FK), nullable = false)
     @ManyToOne(optional = false)
-    private Currency originalCurrency;
+    private Currency baseCurrency;
 
-    @JoinColumn(name = Columns.CURRENCY_UUID, foreignKey = @ForeignKey(name = TABLE_NAME_SHORT + "_" + Columns.CURRENCY_UUID  + _FK), nullable = false)
+    @JoinColumn(name = CURRENCY_UUID, foreignKey = @ForeignKey(name = TABLE_NAME_SHORT + "_" + CURRENCY_UUID  + _FK), nullable = false)
     @ManyToOne(optional = false)
     private Currency currency;
 
-    @Column(name = Columns.VALUE, precision = 4, scale = 4, nullable = false)
+    @Column(name = VALUE, precision = 4, scale = 4, nullable = false)
     private BigDecimal value;
 
-    @JoinColumn(name = Columns.DATE_UUID, foreignKey = @ForeignKey(name = TABLE_NAME_SHORT + "_" + Columns.DATE_UUID  + _FK), nullable = false)
+    @JoinColumn(name = DATE_UUID, foreignKey = @ForeignKey(name = TABLE_NAME_SHORT + "_" + DATE_UUID  + _FK), nullable = false)
     @ManyToOne(optional = false)
     private Date date;
 
@@ -83,14 +86,14 @@ public class Rate extends AbstractEntity {
      * Constructor.
      *
      * @param bank
-     * @param originalCurrency
+     * @param baseCurrency
      * @param date
      * @param currency
      * @param value
      */
-    public Rate(Bank bank, Currency originalCurrency, Date date, Currency currency, BigDecimal value) {
+    public Rate(Bank bank, Currency baseCurrency, Date date, Currency currency, BigDecimal value) {
         this.bank = bank;
-        this.originalCurrency = originalCurrency;
+        this.baseCurrency = baseCurrency;
         this.date = date;
         this.currency = currency;
         this.value = value;
@@ -106,8 +109,8 @@ public class Rate extends AbstractEntity {
     /**
      * @return
      */
-    public Currency getOriginalCurrency() {
-        return originalCurrency;
+    public Currency getBaseCurrency() {
+        return baseCurrency;
     }
 
     /**

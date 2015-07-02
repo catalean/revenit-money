@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cb-finance-storage</artifactId>
+    <artifactId>cb-finance-storage-api</artifactId>
     <packaging>jar</packaging>
 
     <name>CB Finance - Storage</name>
