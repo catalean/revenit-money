@@ -3,21 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>cb-finance</artifactId>
-        <groupId>ro.cb.finance</groupId>
+        <groupId>ro.codebeat.finance</groupId>
+        <artifactId>cobinance</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cb-finance-storage-h2</artifactId>
+    <artifactId>cobinance-storage-h2</artifactId>
     <packaging>jar</packaging>
 
-    <name>CB Finance - H2 DB Storage</name>
+    <name>Cobinance - H2 DB Storage</name>
 
     <dependencies>
         <dependency>
-            <groupId>ro.cb.finance</groupId>
-            <artifactId>cb-finance-storage-api</artifactId>
+            <groupId>ro.codebeat.finance</groupId>
+            <artifactId>cobinance-storage-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.javamoney</groupId>
+            <artifactId>moneta</artifactId>
         </dependency>
 
         <dependency>
@@ -45,7 +50,7 @@
                     <outputDirectory>${basedir}/src/main/resources/sql</outputDirectory>
                     <databaseAction>none</databaseAction>
                     <scriptAction>drop-and-create</scriptAction>
-                    <persistenceUnitName>cb-finance-pu</persistenceUnitName>
+                    <persistenceUnitName>cobinance-pu</persistenceUnitName>
                     <dialect>org.hibernate.dialect.H2Dialect</dialect>
                 </configuration>
             </plugin>

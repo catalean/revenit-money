@@ -4,21 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ro.cb.finance</groupId>
-    <artifactId>cb-finance</artifactId>
+    <groupId>ro.codebeat.finance</groupId>
+    <artifactId>cobinance</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <name>CB Finance</name>
+    <name>Cobinance</name>
 
     <modules>
-        <module>cb-finance-storage-api</module>
-        <module>cb-finance-bnr</module>
-        <module>cb-finance-storage-h2</module>
+        <module>cobinance-bnr</module>
+        <module>cobinance-storage-api</module>
+        <module>cobinance-storage-h2</module>
     </modules>
 
     <properties>
-        <java.version>1.7</java.version>
+        <java.version>1.8</java.version>
         <hibernate.version>4.3.10.Final</hibernate.version>
         <h2.version>1.4.187</h2.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,14 +35,14 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>ro.cb.finance</groupId>
-                <artifactId>cb-finance-storage-api</artifactId>
+                <groupId>ro.codebeat.finance</groupId>
+                <artifactId>cobinance-storage-api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>ro.cb.finance</groupId>
-                <artifactId>cb-finance-storage-h2</artifactId>
+                <groupId>ro.codebeat.finance</groupId>
+                <artifactId>cobinance-storage-h2</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
@@ -62,6 +62,19 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>${h2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.money</groupId>
+                <artifactId>money-api</artifactId>
+                <version>1.0</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.javamoney</groupId>
+                <artifactId>moneta</artifactId>
+                <version>1.0</version>
             </dependency>
 
             <dependency>

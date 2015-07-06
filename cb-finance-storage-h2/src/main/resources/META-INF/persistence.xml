@@ -3,25 +3,27 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 
-    <persistence-unit name="cb-finance-pu" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="cobinance-pu" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <mapping-file>META-INF/entity-mappings.xml</mapping-file>
+        <mapping-file>META-INF/h2-entity-mappings.xml</mapping-file>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
             <!-- Configuring JPA JDBC properties -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/.cb-finance/cb-finance-db" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/.cobinance/cobinance-db" />
             <property name="javax.persistence.jdbc.user" value="sa" />
-            <property name="javax.persistence.jdbc.password" value="cbfinancesa" />
+            <property name="javax.persistence.jdbc.password" value="cobinancesa" />
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
 
             <!-- Hibernate properties -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.format_sql" value="false" />
-            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
 
     </persistence-unit>

@@ -8,6 +8,9 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import static ro.cb.finance.storage.model.Date.*;
 import static ro.cb.finance.storage.model.Date.Columns.*;
 
@@ -50,10 +53,10 @@ public class Date extends AbstractEntity {
     }
 
     @Column(name = DAY_OF_MONTH, nullable = false) @Check(constraints = DAY_OF_MONTH + " >= 1 and " + DAY_OF_MONTH + " <= 31")
-    private int day_of_month;
+    private int dayOfMonth;
 
     @Column(name = MONTH_OF_YEAR, nullable = false) @Check(constraints = MONTH_OF_YEAR + " >= 1 and " + MONTH_OF_YEAR + " <= 12")
-    private int month_of_year;
+    private int monthOfYear;
 
     @Column(name = YEAR, nullable = false) @Check(constraints = YEAR + " > 0")
     private int year;
@@ -68,28 +71,46 @@ public class Date extends AbstractEntity {
     /**
      * Constructor.
      *
-     * @param day_of_month
-     * @param month_of_year
+     * @param dayOfMonth
+     * @param monthOfYear
      * @param year
      */
-    public Date(int day_of_month, int month_of_year, int year) {
-        this.day_of_month = day_of_month;
-        this.month_of_year = month_of_year;
+    public Date(int dayOfMonth, int monthOfYear, int year) {
+        this.dayOfMonth = dayOfMonth;
+        this.monthOfYear = monthOfYear;
         this.year = year;
     }
 
     /**
      * @return
      */
-    public int getDay_of_month() {
-        return day_of_month;
+    public static Date today() {
+        LocalDate today = LocalDate.now();
+        return new Date(today.getDayOfMonth(), today.getMonthValue(), today.getYear());
     }
 
     /**
      * @return
      */
-    public int getMonth_of_year() {
-        return month_of_year;
+    public Date tomorrow() {
+        LocalDate thisAsLocalDate = LocalDate.of(year, Month.of(monthOfYear), dayOfMonth);
+        LocalDate nextDay = thisAsLocalDate.plusDays(1);
+
+        return new Date(nextDay.getDayOfMonth(), nextDay.getMonthValue(), nextDay.getYear());
+    }
+
+    /**
+     * @return
+     */
+    public int getDayOfMonth() {
+        return dayOfMonth;
+    }
+
+    /**
+     * @return
+     */
+    public int getMonthOfYear() {
+        return monthOfYear;
     }
 
     /**

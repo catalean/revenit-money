@@ -1,7 +1,5 @@
 package ro.cb.finance.storage.model;
 
-import ro.cb.finance.storage.util.UUIDGenerator;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -77,7 +75,8 @@ public abstract class AbstractEntity {
      *
      */
     private void createUUid() {
-        this.uuid = UUIDGenerator.next();
+        //a new {@link UUID} as string of length 32 and all upper case characters.
+        this.uuid = java.util.UUID.randomUUID().toString().replaceAll("-", "").toUpperCase(); // replace "-" 36 -> 32 char
     }
 
     /**

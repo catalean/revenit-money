@@ -1,28 +1,25 @@
 package ro.cb.finance.storage;
 
-import ro.cb.finance.storage.util.SpiHelper;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+import java.util.Iterator;
+import java.util.ServiceLoader;
 
 /**
  *
  */
 public abstract class RatesStorageProvider {
 
-    private static RatesStorage INSTANCE = null;
-
     /**
      * @return
      */
     public static RatesStorage open() {
-        if (INSTANCE == null) {
-            RatesStorageProvider provider = SpiHelper.getService(RatesStorageProvider.class);
-            if (provider == null) {
-                return null;
-            }
-
-            INSTANCE = provider.getStorage();
+        Iterator<RatesStorageProvider> providers = ServiceLoader.load(RatesStorageProvider.class, getClassLoader()).iterator();
+        if (providers.hasNext()) {
+            return providers.next().getStorage();
         }
 
-        return INSTANCE;
+        return null;
     }
 
 
@@ -30,4 +27,29 @@ public abstract class RatesStorageProvider {
      * @return
      */
     protected abstract RatesStorage getStorage();
+
+    /**
+     * Creates a privileged {@link ClassLoader}
+     *
+     * @return Creates a privileged class-loader
+     */
+    private static ClassLoader getClassLoader() {
+        ClassLoader loader = AccessController.doPrivileged(
+                new PrivilegedAction<ClassLoader>() {
+                   public ClassLoader run() {
+                       try {
+                           return Thread.currentThread().getContextClassLoader();
+                       } catch (SecurityException e) {
+                           return null;
+                       }
+                   }
+               }
+        );
+
+        if (loader == null) {
+            loader = RatesStorageProvider.class.getClassLoader();
+        }
+
+        return loader;
+    }
 }
