@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>ro.codebeat.finance</groupId>
+        <artifactId>cobinance</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cobinance-bnr</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Cobinance - BNR</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>ro.codebeat.finance</groupId>
+            <artifactId>cobinance-storage-api</artifactId>
+        </dependency>
+
+        <dependency> <!--TODO remove - to be added by an application which includes also impl dependencies -->
+            <groupId>ro.codebeat.finance</groupId>
+            <artifactId>cobinance-storage-h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency> <!--TODO remove - to be added by an application which includes also impl dependencies -->
+            <groupId>org.javamoney</groupId>
+            <artifactId>moneta</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.12.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <schemaDirectory>${basedir}/src/main/resources</schemaDirectory>
+                    <generateDirectory>${basedir}/src/main/java</generateDirectory>
+                    <generatePackage>ro.codebeat.finance.bnr.model.xml</generatePackage>
+                    <episode>false</episode>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
