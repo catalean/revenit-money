@@ -75,7 +75,7 @@ public final class BNR {
                 String targetFileName = String.format(ANNUAL_RATES_FILE_NAME, String.valueOf(i));
                 String sourceURL = String.format(ANNUAL_RATES_URL, String.valueOf(i));
 
-                File targetDir = new File(System.getProperty("user.home"), ".cb-finance");
+                File targetDir = new File(System.getProperty("user.home"), ".cobinance");
 
                 //check if the file exists already locally - to minimize what we need to download
                 File targetFile = new File(targetDir, targetFileName);
@@ -223,16 +223,16 @@ public final class BNR {
     }
 
     public static void main(String[] args) {
-//        try {
-//            BNR.actualizeRates();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (JAXBException e) {
-//            e.printStackTrace();
-//        } catch (XMLStreamException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            BNR.actualizeRates();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (XMLStreamException e) {
+            e.printStackTrace();
+        }
 
-        BNR.convert(100, "RON", "EUR");
+//        BNR.convert(100, "RON", "EUR");
     }
 }

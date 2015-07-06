@@ -22,7 +22,7 @@ import java.util.Map;
 public final class H2RatesStorage implements RatesStorage {
 
     /** The name of the JPA persistence unit configured for storage */
-    public static final String PERSISTENCE_UNIT_NAME = "cb-finance-pu";
+    public static final String PERSISTENCE_UNIT_NAME = "cobinance-pu";
 
     private EntityManagerFactory emf;
 
