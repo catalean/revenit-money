@@ -3,9 +3,9 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_1.xsd">
 
-    <entity class="ro.codebeat.finance.storage.model.Bank"/>
-    <entity class="ro.codebeat.finance.storage.model.Currency"/>
-    <entity class="ro.codebeat.finance.storage.model.Date"/>
-    <entity class="ro.codebeat.finance.storage.model.Rate"/>
+    <entity class="ro.cobinance.money.storage.model.Bank"/>
+    <entity class="ro.cobinance.money.storage.model.Currency"/>
+    <entity class="ro.cobinance.money.storage.model.Date"/>
+    <entity class="ro.cobinance.money.storage.model.Rate"/>
 
 </entity-mappings>

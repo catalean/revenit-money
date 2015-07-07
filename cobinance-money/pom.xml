@@ -9,10 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cobinance-storage-h2</artifactId>
+    <artifactId>cobinance-money</artifactId>
     <packaging>jar</packaging>
 
-    <name>Cobinance - H2 DB Storage</name>
+    <name>Cobinance - Money</name>
 
     <dependencies>
         <dependency>
@@ -20,41 +20,38 @@
             <artifactId>cobinance-storage-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.javamoney</groupId>
-            <artifactId>moneta</artifactId>
+        <dependency> <!--TODO remove - to be added by an application which includes also impl dependencies -->
+            <groupId>ro.cobinance</groupId>
+            <artifactId>cobinance-storage-h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+        <dependency> <!--TODO remove - to be added by an application which includes also impl dependencies -->
+            <groupId>org.javamoney</groupId>
+            <artifactId>moneta</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>io.github.divinespear</groupId>
-                <artifactId>jpa-schema-maven-plugin</artifactId>
-                <version>0.1.12</version>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.12.3</version>
                 <executions>
                     <execution>
-                        <id>generate-ddl-create</id>
-                        <phase>process-classes</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <outputDirectory>${basedir}/src/main/resources/sql</outputDirectory>
-                    <databaseAction>none</databaseAction>
-                    <scriptAction>drop-and-create</scriptAction>
-                    <persistenceUnitName>cobinance-pu</persistenceUnitName>
-                    <dialect>org.hibernate.dialect.H2Dialect</dialect>
+                    <schemaDirectory>${basedir}/src/main/resources</schemaDirectory>
+                    <generateDirectory>${basedir}/src/main/java</generateDirectory>
+                    <generatePackage>ro.cobinance.money.bnr.xml</generatePackage>
+                    <episode>false</episode>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
