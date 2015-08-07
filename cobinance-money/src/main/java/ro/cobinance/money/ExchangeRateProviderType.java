@@ -4,8 +4,7 @@ import javax.money.convert.ExchangeRateProviderSupplier;
 
 /**
  * <p>
- * This enum contains all implementation of Cobinance. Using this enum will easier
- * to choose an available implementation.
+ * This enum contains identifiers of the implementations provided by Cobinance. Usage:
  * </p>
  * <code>ExchangeRateProvider provider = MonetaryConversions.getExchangeRateProvider(ExchangeRateProviderType.BNR);<code>
  */

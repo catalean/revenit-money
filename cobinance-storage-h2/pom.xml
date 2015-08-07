@@ -12,7 +12,7 @@
     <artifactId>cobinance-storage-h2</artifactId>
     <packaging>jar</packaging>
 
-    <name>Cobinance - H2 DB Storage</name>
+    <name>Cobinance - Storage - H2 DB</name>
 
     <dependencies>
         <dependency>

@@ -15,6 +15,7 @@ import javax.money.convert.MonetaryConversions;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
+import java.util.Collection;
 
 /**
  * @author Catalin Kormos
@@ -23,6 +24,11 @@ public class ConversionTest {
 
     @Test
     public void convert() {
+        CurrencyConversion conv = MonetaryConversions.getConversion("EUR", ExchangeRateProviderType.BNR.get());
+        Collection<String> provNames = MonetaryConversions.getConversionProviderNames();
+
+        System.out.println(conv + ", " + provNames);
+
         CurrencyUnit ron = Monetary.getCurrency("RON");
         CurrencyUnit eur = Monetary.getCurrency("EUR");
 

@@ -20,15 +20,15 @@
             <artifactId>cobinance-storage-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.javamoney</groupId>
+            <artifactId>moneta</artifactId>
+        </dependency>
+
         <dependency> <!--TODO remove - to be added by an application which includes also impl dependencies -->
             <groupId>ro.cobinance</groupId>
             <artifactId>cobinance-storage-h2</artifactId>
             <scope>runtime</scope>
-        </dependency>
-
-        <dependency> <!--TODO remove - to be added by an application which includes also impl dependencies -->
-            <groupId>org.javamoney</groupId>
-            <artifactId>moneta</artifactId>
         </dependency>
     </dependencies>
 
