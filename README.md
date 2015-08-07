@@ -1,4 +1,4 @@
-# Revenit Money
+# ReVenit Money
 
 Librarie Java pentru preluarea si stocarea cursului valutar din Romania. Not yet released.
 
